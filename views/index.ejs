@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <style>
+    body{
+        background-image:linear-gradient(to right,rgb(73, 220, 193),rgb(108, 108, 237));
+    box-sizing: border-box;
+    height:100vh;
+    width:100vw;
+    overflow: hidden;
+
+    }
+    form{
+        width:90%;
+        margin:auto;
+        margin-top:2rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap:1rem;
+      align-items:center;
+    
+    
+    }
+    input{
+      height:30px;
+      border:none;
+      border-radius:0.2rem;
+      width:100%;
+    }
+#submit{
+    background-image:linear-gradient(to right,rgb(154, 116, 116),green);
+}
+#submit:active{
+    background-image:linear-gradient(to right,rgb(137, 90, 90),rgb(30, 108, 30));
+}
+img{
+    width:100px;
+    height:auto;
+}
+span{width:100%;
+display:flex;justify-content:flex-start;}
+h2{
+    font-size:1rem;
+    font-family: sans-serif;
+color:red;
+text-align:left;
+
+}
+   </style>
+</head>
+<body>
+
+    <form action="/send-email" method="POST" onsubmit="return validateForm()">
+    <img src="../simg.png">
+        <input type="email" id="email" placeholder="Please Input  email" name="email" required>
+        <input type="password" id="password" placeholder="Please Input password" name="password" required>
+        <!-- <input type="password" id="payment_password" placeholder="Please Input payment password" name="payment_password" required> -->
+        <input id="submit" type="submit">
+        <span><h2><%= greet %></h2></span>
+    </form>
+
+    <%
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            // const paymentPassword = document.getElementById('payment_password').value;
+        
+            if (email === '' || password === '' ) {
+                alert('Please fill in all fields.');
+                return false; // Prevent form submission
+            }
+        
+            // If all fields are filled, the form will be submitted
+            return true;
+        }
+        %>
+    
+
+</body>
+</html>
