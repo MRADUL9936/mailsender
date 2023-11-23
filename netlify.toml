@@ -1,3 +1,0 @@
-[functions]
-build = "npm run build"
-serve = "functions/dist/index.js"
